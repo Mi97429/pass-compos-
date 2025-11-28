@@ -8,16 +8,14 @@
   <style>
     body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
     .card { border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 25px; }
-    .tip { font-size: 0.95rem; margin-top: 10px; }
-    .btn-check-answer { width: 100%; margin-top: 10px; }
+    .tip { font-size: 0.95rem; margin-top: 10px; display:none; }
     .vraag-text { font-weight: 500; font-size: 1.1rem; }
   </style>
 </head>
 <body>
-
 <div class="container mt-5">
   <h1 class="mb-4 text-center">Passé Composé Oefening</h1>
-  <p class="text-center mb-5">Kies het juiste hulpwerkwoord en voltooid deelwoord. Klik op "Controleer antwoord" voor uitleg.</p>
+  <p class="text-center mb-5">Kies het juiste hulpwerkwoord en voltooid deelwoord. Klik op de knop voor uitleg.</p>
 
   <!-- Vraag 1 -->
   <div class="card" id="vraag1">
@@ -30,8 +28,8 @@
       <input class="form-check-input" type="radio" name="q1" value="etre" id="q1b">
       <label class="form-check-label" for="q1b">Être</label>
     </div>
-    <button class="btn btn-primary btn-check-answer" type="button" onclick="checkAnswer('q1', 'avoir', 'J’ai mangé une pomme.', 'Avoir wordt gebruikt bij handelingen of acties. Hier is \"manger\" een actie die iemand uitvoert op iets (de appel). Het werkwoord heeft een object: de appel.')">Controleer antwoord</button>
-    <div class="tip text-success" id="tip-q1" style="display:none;"></div>
+    <button class="btn btn-primary btn-check-answer" data-question="q1" data-answer="avoir" data-correct="J’ai mangé une pomme." data-feedback="Avoir wordt gebruikt bij handelingen of acties. Hier is 'manger' een actie die iemand uitvoert op iets (de appel).">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q1"></div>
   </div>
 
   <!-- Vraag 2 -->
@@ -45,8 +43,8 @@
       <input class="form-check-input" type="radio" name="q2" value="etre" id="q2b">
       <label class="form-check-label" for="q2b">Être</label>
     </div>
-    <button class="btn btn-primary btn-check-answer" type="button" onclick="checkAnswer('q2', 'etre', 'Elle est allée au parc.', 'Être wordt gebruikt bij beweging. \"Aller\" beschrijft een beweging van de persoon naar een plek. Er is geen direct object, dus Être is nodig.')">Controleer antwoord</button>
-    <div class="tip text-success" id="tip-q2" style="display:none;"></div>
+    <button class="btn btn-primary btn-check-answer" data-question="q2" data-answer="etre" data-correct="Elle est allée au parc." data-feedback="Être wordt gebruikt bij beweging. 'Aller' beschrijft een beweging van de persoon naar een plek. Er is geen direct object.">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q2"></div>
   </div>
 
   <!-- Vraag 3 -->
@@ -60,8 +58,8 @@
       <input class="form-check-input" type="radio" name="q3" value="etre" id="q3b">
       <label class="form-check-label" for="q3b">Être</label>
     </div>
-    <button class="btn btn-primary btn-check-answer" type="button" onclick="checkAnswer('q3', 'avoir', 'Nous avons fini nos devoirs.', 'Avoir wordt gebruikt bij handelingen of acties. \"Finir\" is een actie die iets voltooit, het heeft een object: de opdrachten.')">Controleer antwoord</button>
-    <div class="tip text-success" id="tip-q3" style="display:none;"></div>
+    <button class="btn btn-primary btn-check-answer" data-question="q3" data-answer="avoir" data-correct="Nous avons fini nos devoirs." data-feedback="Avoir wordt gebruikt bij handelingen of acties. 'Finir' is een actie die iets voltooit, het heeft een object: de opdrachten.">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q3"></div>
   </div>
 
   <!-- Vraag 4 -->
@@ -75,40 +73,45 @@
       <input class="form-check-input" type="radio" name="q4" value="etre" id="q4b">
       <label class="form-check-label" for="q4b">Être</label>
     </div>
-    <button class="btn btn-primary btn-check-answer" type="button" onclick="checkAnswer('q4', 'etre', 'Ils sont partis tôt.', 'Être wordt gebruikt bij beweging. \"Partir\" beschrijft het vertrekken van de personen. Er is geen direct object en het is een beweging, dus Être is nodig.')">Controleer antwoord</button>
-    <div class="tip text-success" id="tip-q4" style="display:none;"></div>
+    <button class="btn btn-primary btn-check-answer" data-question="q4" data-answer="etre" data-correct="Ils sont partis tôt." data-feedback="Être wordt gebruikt bij beweging. 'Partir' beschrijft het vertrekken van de personen. Er is geen direct object en het is een beweging.">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q4"></div>
   </div>
-
 </div>
 
 <script>
-function checkAnswer(qName, correctAnswer, correctText, feedback) {
-  const radios = document.getElementsByName(qName);
-  let selected = null;
-  for (let r of radios) {
-    if (r.checked) selected = r.value;
-  }
-  const tipDiv = document.getElementById('tip-' + qName);
-  if (!selected) {
-    tipDiv.innerHTML = 'Kies eerst een antwoord.';
-    tipDiv.classList.remove('text-success');
-    tipDiv.classList.add('text-danger');
-    tipDiv.style.display = 'block';
-    return;
-  }
-  if (selected === correctAnswer) {
-    tipDiv.innerHTML = `<strong>${correctText}</strong><br>${feedback}`;
-    tipDiv.classList.remove('text-danger');
-    tipDiv.classList.add('text-success');
-    tipDiv.style.display = 'block';
-  } else {
-    tipDiv.innerHTML = 'Fout. Probeer opnieuw.';
-    tipDiv.classList.remove('text-success');
-    tipDiv.classList.add('text-danger');
-    tipDiv.style.display = 'block';
-  }
-}
-</script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-check-answer').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qName = btn.dataset.question;
+      const correctAnswer = btn.dataset.answer;
+      const correctText = btn.dataset.correct;
+      const feedback = btn.dataset.feedback;
 
+      const radios = document.getElementsByName(qName);
+      let selected = null;
+      for (let r of radios) if (r.checked) selected = r.value;
+
+      const tipDiv = document.getElementById('tip-' + qName);
+      if (!selected) {
+        tipDiv.innerHTML = 'Kies eerst een antwoord.';
+        tipDiv.className = 'tip text-danger';
+        tipDiv.style.display = 'block';
+        return;
+      }
+
+      if (selected === correctAnswer) {
+        tipDiv.innerHTML = `<strong>${correctText}</strong><br>${feedback}`;
+        tipDiv.className = 'tip text-success';
+        tipDiv.style.display = 'block';
+      } else {
+        tipDiv.innerHTML = 'Fout. Probeer opnieuw.';
+        tipDiv.className = 'tip text-danger';
+        tipDiv.style.display = 'block';
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
+
