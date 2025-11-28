@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Passé Composé Oefening</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
+    .card { border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 25px; }
+    .tip { font-size: 0.95rem; margin-top: 10px; }
+    .btn-check-answer { width: 100%; margin-top: 10px; }
+    .vraag-text { font-weight: 500; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Passé Composé Oefening</h1>
+  <p class="text-center mb-5">Kies het juiste hulpwerkwoord en voltooid deelwoord. Klik op "Controleer antwoord" voor uitleg.</p>
+
+  <!-- Vraag 1 -->
+  <div class="card" id="vraag1">
+    <p class="vraag-text">1. J’___ mangé une pomme.</p>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="avoir" id="q1a">
+      <label class="form-check-label" for="q1a">Avoir</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="etre" id="q1b">
+      <label class="form-check-label" for="q1b">Être</label>
+    </div>
+    <button class="btn btn-primary btn-check-answer" onclick="checkAnswer('q1', 'avoir', 'J’ai mangé une pomme.', 'Avoir wordt gebruikt bij handelingen of acties. Hier is "manger" een actie die iemand uitvoert op iets (de appel). Het werkwoord heeft een object: de appel.')">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q1" style="display:none;"></div>
+  </div>
+
+  <!-- Vraag 2 -->
+  <div class="card" id="vraag2">
+    <p class="vraag-text">2. Elle ___ allée au parc.</p>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q2" value="avoir" id="q2a">
+      <label class="form-check-label" for="q2a">Avoir</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q2" value="etre" id="q2b">
+      <label class="form-check-label" for="q2b">Être</label>
+    </div>
+    <button class="btn btn-primary btn-check-answer" onclick="checkAnswer('q2', 'etre', 'Elle est allée au parc.', 'Être wordt gebruikt bij beweging. "Aller" beschrijft een beweging van de persoon naar een plek. Er is geen direct object, dus Être is nodig.')">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q2" style="display:none;"></div>
+  </div>
+
+  <!-- Vraag 3 -->
+  <div class="card" id="vraag3">
+    <p class="vraag-text">3. Nous ___ fini nos devoirs.</p>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="avoir" id="q3a">
+      <label class="form-check-label" for="q3a">Avoir</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="etre" id="q3b">
+      <label class="form-check-label" for="q3b">Être</label>
+    </div>
+    <button class="btn btn-primary btn-check-answer" onclick="checkAnswer('q3', 'avoir', 'Nous avons fini nos devoirs.', 'Avoir wordt gebruikt bij handelingen of acties. "Finir" is een actie die iets voltooit, het heeft een object: de opdrachten.')">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q3" style="display:none;"></div>
+  </div>
+
+  <!-- Vraag 4 -->
+  <div class="card" id="vraag4">
+    <p class="vraag-text">4. Ils ___ partis tôt.</p>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q4" value="avoir" id="q4a">
+      <label class="form-check-label" for="q4a">Avoir</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q4" value="etre" id="q4b">
+      <label class="form-check-label" for="q4b">Être</label>
+    </div>
+    <button class="btn btn-primary btn-check-answer" onclick="checkAnswer('q4', 'etre', 'Ils sont partis tôt.', 'Être wordt gebruikt bij beweging. "Partir" beschrijft het vertrekken van de personen. Er is geen direct object en het is een beweging, dus Être is nodig.')">Controleer antwoord</button>
+    <div class="tip text-success" id="tip-q4" style="display:none;"></div>
+  </div>
+
+</div>
+
+<script>
+function checkAnswer(qName, correctAnswer, correctText, feedback) {
+  const radios = document.getElementsByName(qName);
+  let selected = null;
+  for (let r of radios) {
+    if (r.checked) selected = r.value;
+  }
+  const tipDiv = document.getElementById('tip-' + qName);
+  if (!selected) {
+    tipDiv.innerHTML = 'Kies eerst een antwoord.';
+    tipDiv.classList.remove('text-success');
+    tipDiv.classList.add('text-danger');
+    tipDiv.style.display = 'block';
+    return;
+  }
+  if (selected === correctAnswer) {
+    tipDiv.innerHTML = `<strong>${correctText}</strong><br>${feedback}`;
+    tipDiv.classList.remove('text-danger');
+    tipDiv.classList.add('text-success');
+    tipDiv.style.display = 'block';
+  } else {
+    tipDiv.innerHTML = 'Fout. Probeer opnieuw.';
+    tipDiv.classList.remove('text-success');
+    tipDiv.classList.add('text-danger');
+    tipDiv.style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>
